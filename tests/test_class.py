@@ -32,6 +32,16 @@ def test_matrix_input_eigen_provided():
     assert np.all(np.abs(evs - np.array([-1,0,1,2,3,4]))< 1e-9)
     assert np.all(np.abs(masses - M)< 1e-9)
 
+def test_matrix_single_function():
+    
+    ps = power_spectrum(eigendecomposition_provided=True)
+    ps.fit(eigenvalues=d,eigenvectors=np.eye(10))
+    
+    evs, masses = ps.transform(f[:,0])
+
+    assert np.all(np.abs(evs - np.array([-1,0,1,2,3,4]))< 1e-9)
+    assert np.all(np.abs(masses - M[:,0])< 1e-9)
+
 def test_catches_ordering_of_eigenvalues():
 
     ps = power_spectrum(eigendecomposition_provided=True)
